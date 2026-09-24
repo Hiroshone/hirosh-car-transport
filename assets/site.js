@@ -14,7 +14,7 @@ if(form){
   for(const el of form.querySelectorAll('input[required]')){el.value=el.value.trim();}
   if(!form.reportValidity())return;
   const data=new FormData(form);
-  message=`Car transport enquiry — HIROSH\n\nPickup: ${data.get('from')}\nDelivery: ${data.get('to')}\nCar: ${data.get('car')}\nPreferred pickup: ${data.get('date')}\nName: ${data.get('name')}\nPhone: ${data.get('phone')}\nNotes: ${data.get('notes')||'None'}\n\nPlease confirm availability, total charges, inclusions and the expected schedule.`;
+  message=`Car transport enquiry — Hirosh Roadways\n\nPickup: ${data.get('from')}\nDelivery: ${data.get('to')}\nCar: ${data.get('car')}\nPreferred pickup: ${data.get('date')}\nName: ${data.get('name')}\nPhone: ${data.get('phone')}\nNotes: ${data.get('notes')||'None'}\n\nPlease confirm availability, total charges, inclusions and the expected schedule.`;
   document.querySelector('#enquiry-text').textContent=message;
   await contactReady;
   const options=document.querySelector('#send-options');options.replaceChildren();
@@ -25,5 +25,5 @@ if(form){
   document.querySelector('#enquiry-result').hidden=false;document.querySelector('#result-title').focus();
  });
  form.addEventListener('input',()=>{document.querySelector('#enquiry-result').hidden=true;});
- document.querySelector('#download-enquiry').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([message],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='hirosh-car-transport-enquiry.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);document.querySelector('#enquiry-status').textContent='Download requested. This enquiry has not been sent to HIROSH.';});
+ document.querySelector('#download-enquiry').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([message],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='hirosh-car-transport-enquiry.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);document.querySelector('#enquiry-status').textContent='Download requested. This enquiry has not been sent to Hirosh Roadways.';});
 }
