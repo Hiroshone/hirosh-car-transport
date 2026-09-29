@@ -11,10 +11,10 @@ if(form){
  const contactReady=fetch('/assets/contact.json').then(r=>{if(!r.ok)throw Error('Contact unavailable');return r.json();}).then(value=>{contact=value;}).catch(()=>{});
  form.addEventListener('submit',async event=>{
   event.preventDefault();
-  for(const el of form.querySelectorAll('input[required]')){el.value=el.value.trim();}
+  for(const el of form.querySelectorAll('input')){el.value=el.value.trim();}
   if(!form.reportValidity())return;
   const data=new FormData(form);
-  message=`Car transport enquiry — Hirosh Roadways\n\nPickup: ${data.get('from')}\nDelivery: ${data.get('to')}\nCar: ${data.get('car')}\nPreferred pickup: ${data.get('date')}\nName: ${data.get('name')}\nPhone: ${data.get('phone')}\nNotes: ${data.get('notes')||'None'}\n\nPlease confirm availability, total charges, inclusions and the expected schedule.`;
+  message=`Car transport enquiry — Hirosh Roadways\n\nPickup: ${data.get('from')}\nPickup PIN: ${data.get('pickupPin')||'Not provided'}\nDelivery: ${data.get('to')}\nDelivery PIN: ${data.get('deliveryPin')||'Not provided'}\nCar: ${data.get('car')}\nRunning condition: ${data.get('condition')||'Not specified'}\nCarrier preference: ${data.get('carrier')||'Please advise'}\nPreferred pickup: ${data.get('date')}\nName: ${data.get('name')}\nPhone: ${data.get('phone')}\nNotes: ${data.get('notes')||'None'}\n\nPlease confirm availability, total charges, inclusions and the expected schedule.`;
   document.querySelector('#enquiry-text').textContent=message;
   await contactReady;
   const options=document.querySelector('#send-options');options.replaceChildren();
@@ -24,6 +24,6 @@ if(form){
   document.querySelector('#enquiry-status').textContent=contact.whatsapp||contact.email?'Send the message in WhatsApp or your email app to complete your enquiry.':'Direct enquiry channels are not available yet. Download your enquiry to keep a copy; nothing has been sent.';
   document.querySelector('#enquiry-result').hidden=false;document.querySelector('#result-title').focus();
  });
- form.addEventListener('input',()=>{document.querySelector('#enquiry-result').hidden=true;});
+ for(const eventName of ['input','change'])form.addEventListener(eventName,()=>{document.querySelector('#enquiry-result').hidden=true;});
  document.querySelector('#download-enquiry').addEventListener('click',()=>{const url=URL.createObjectURL(new Blob([message],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='hirosh-car-transport-enquiry.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);document.querySelector('#enquiry-status').textContent='Download requested. This enquiry has not been sent to Hirosh Roadways.';});
 }
