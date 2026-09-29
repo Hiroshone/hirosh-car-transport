@@ -12,3 +12,8 @@
 @media(max-width:1000px){.hero-grid{grid-template-columns:1fr}.hero-photo img{max-height:500px;object-fit:cover}.route-wide{max-width:none}.hero h1{font-size:clamp(2.6rem,7.8vw,4rem)}}
 @media(max-width:480px){.route-wide{padding:24px}.route-wide form{display:flex;flex-direction:column;align-items:stretch;gap:10px}.route-wide .button{margin-top:12px}.brand strong{font-size:1.2rem}.brand>span{font-size:.52rem}.hero-photo img{border-radius:5px}.hero .actions{gap:12px}.hero h1{font-size:2.6rem}}
 
+
+/* Quote form transport preferences */
+#quote-form select{font:inherit;width:100%;min-width:0;min-height:50px;border:1px solid #9bafb3;border-radius:4px;padding:12px 14px;background:#fff;color:var(--ink)}
+#quote-form select:focus-visible{outline:3px solid #617e00;outline-offset:5px}
+#carrier-help{margin:8px 0 0}
